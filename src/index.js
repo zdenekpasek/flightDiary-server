@@ -1,33 +1,22 @@
-require('./models/user');
-const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const authRoute = require('./routes/authRoute');
+const config = require('./config');
 
-const app = express();
-
-app.use(bodyParser.json());
-app.use(authRoute);
-
-const mongoUri =
-  'mongodb+srv://admin:774146480admin@cluster0.2altz.mongodb.net/<dbname>?retryWrites=true&w=majority';
-
-mongoose.connect(mongoUri, {
+const mongooseOptions = {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
-});
-mongoose.connection.on('connected', () => {
-  console.log('Connected to mongo instance');
-});
-mongoose.connection.on('error', (err) => {
-  console.log('Error connecting to mongo', err);
-});
+};
 
-app.get('/', (req, res) => {
-  res.send('hello there');
-});
+mongoose.Promise = global.Promise;
 
-app.listen(3000, () => {
-  console.log('Listening on port 3000');
-});
+mongoose
+  .connect(config.dbUrl, mongooseOptions)
+  .then(() => {
+    console.log('Db connection successful');
+
+    const ExpressLoader = require('./loaders/Express');
+    new ExpressLoader();
+  })
+  .catch((err) => {
+    console.log(err);
+  });

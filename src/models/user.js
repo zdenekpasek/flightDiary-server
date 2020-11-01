@@ -1,6 +1,29 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
+const uavSchema = new mongoose.Schema({
+  uavName: {
+    type: String,
+    required: true,
+  },
+  weight: {
+    type: String,
+    required: true,
+  },
+  category: {
+    type: String,
+    required: true,
+  },
+  uav: {
+    type: String,
+    required: true,
+  },
+  okNumber: {
+    type: Number,
+    required: true,
+  },
+});
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -15,6 +38,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  uavs: [uavSchema],
 });
 
 // pre save hook
