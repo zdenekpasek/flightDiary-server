@@ -4,6 +4,7 @@ const express = require('express');
 const config = require('../config');
 const uavRoute = require('../routes/uavRoute');
 const authRoute = require('../routes/authRoute');
+const userRoute = require('../routes/userRoute');
 
 class ExpressLoader {
   constructor() {
@@ -24,6 +25,7 @@ class ExpressLoader {
     app.use(bodyParser.json({ limit: '20mb' }));
     app.use(authRoute);
     app.use(uavRoute);
+    app.use(userRoute);
 
     // Start application
     this.server = app.listen(config.port, () => {

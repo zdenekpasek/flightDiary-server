@@ -8,5 +8,6 @@ router.use(requireAuth);
 
 router.get('/uav', UavController.getUavs);
 router.post('/uav', UavController.create);
+router.put('/uav/:id', UavController.update);
 
 module.exports = router;
