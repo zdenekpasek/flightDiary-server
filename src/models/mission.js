@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const missionSchema = new mongoose.Schema({
-  name: {
+  missionName: {
     type: String,
     required: true,
   },
@@ -13,20 +13,32 @@ const missionSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  GPS: {
+  gps: {
     type: String,
     required: true,
   },
-  date: {
+
+  missionStart: {
     type: Date,
     required: true,
   },
-  weather: {
-    tmp: { type: String },
-    wind: { type: String },
+
+  missionEnd: {
+    type: Date,
+    required: true,
   },
-  battery: { type: String },
+
+  flightTime: {
+    type: String,
+  },
+
+  tmp: { type: String },
+  wind: { type: String },
+
+  usedBatteries: { type: String },
   desc: { type: String },
+
+  _owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 });
 
 mongoose.model('Mission', missionSchema);

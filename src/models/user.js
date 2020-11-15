@@ -39,6 +39,7 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   uavs: [uavSchema],
+  missions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Mission' }],
 });
 
 // pre save hook

@@ -1,10 +1,12 @@
 require('../models/user');
+require('../models/mission');
 const bodyParser = require('body-parser');
 const express = require('express');
 const config = require('../config');
 const uavRoute = require('../routes/uavRoute');
 const authRoute = require('../routes/authRoute');
 const userRoute = require('../routes/userRoute');
+const missionRoute = require('../routes/missionRoute');
 
 class ExpressLoader {
   constructor() {
@@ -26,6 +28,7 @@ class ExpressLoader {
     app.use(authRoute);
     app.use(uavRoute);
     app.use(userRoute);
+    app.use(missionRoute);
 
     // Start application
     this.server = app.listen(config.port, () => {
