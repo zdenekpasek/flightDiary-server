@@ -13,7 +13,6 @@ exports.create = async (req, res) => {
     wind,
     desc,
   } = req.body;
-  console.log(req.body);
   const { _id, name } = req.user;
   if (
     !missionName ||

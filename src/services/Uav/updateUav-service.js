@@ -12,25 +12,16 @@ const updateUav = async (
 ) => {
   try {
     const user = await User.findById(_id);
+    const uavById = await user.uavs.id(uavId);
 
-    // const uavToUpdate = await user.uavs.findById(uavId);
+    uavById.uavName = uavName;
+    uavById.weight = weight;
+    uavById.category = category;
+    uavById.uav = uav;
+    uavById.okNumber = okNumber;
+    user.save();
 
-    const updatedUav = user.update(
-      { _id: uavId },
-      {
-        $set: {
-          uavName,
-          weight,
-          category,
-          uav,
-          okNumber,
-        },
-      }
-    );
-
-    await user.save();
-
-    return { success: true, updatedUav };
+    return { success: true };
   } catch (err) {
     return { success: false, err };
   }

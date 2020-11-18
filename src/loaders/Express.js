@@ -7,6 +7,7 @@ const uavRoute = require('../routes/uavRoute');
 const authRoute = require('../routes/authRoute');
 const userRoute = require('../routes/userRoute');
 const missionRoute = require('../routes/missionRoute');
+const pdfRoute = require('../routes/pdfRouter');
 
 class ExpressLoader {
   constructor() {
@@ -29,6 +30,7 @@ class ExpressLoader {
     app.use(uavRoute);
     app.use(userRoute);
     app.use(missionRoute);
+    app.use(pdfRoute);
 
     // Start application
     this.server = app.listen(config.port, () => {

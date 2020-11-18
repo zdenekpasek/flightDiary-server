@@ -46,7 +46,7 @@ exports.update = async (req, res) => {
       okNumber
     );
 
-    success ? res.send({ updatedUav }) : res.status(422).send(err.message);
+    success ? res.send({ success }) : res.status(422).send(err.message);
   } catch (err) {
     res.status(422).send(err.message);
   }
