@@ -6,8 +6,7 @@ exports.create = async (req, res) => {
     const { missions } = await getMissions(req.user._id);
     const { success, err } = await createPdf(req, res, missions);
 
-    console.log(success);
-    success ? res.status(201) : res.status(422).send(err);
+    success ? res.status(200) : res.status(422).send(err);
   } catch (err) {
     console.log(err);
     res.status(422).send(err.message);

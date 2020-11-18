@@ -1,6 +1,7 @@
 const { createUser } = require('../services/User/signup-service');
 const { loginUser } = require('../services/User/login-service');
 const { getUserById } = require('../services/User/getUser-service');
+const { getUserStats } = require('../services/User/getUserStats-service');
 
 exports.create = async (req, res) => {
   const { name, email, password } = req.body;
@@ -34,8 +35,19 @@ exports.getUser = async (req, res) => {
   const { _id } = req.user;
 
   try {
-    const { success, user, err } = await getUserById(_id);
+    const { success, err } = await getUserById(_id);
     success ? res.send({ user }) : res.status(422).send(err.message);
+  } catch (err) {
+    res.status(422).send(err.message);
+  }
+};
+
+exports.getStats = async (req, res) => {
+  const { _id } = req.user;
+
+  try {
+    const { success, stats, err } = await getUserStats(_id);
+    success ? res.send({ stats }) : res.status(422).send(err.message);
   } catch (err) {
     res.status(422).send(err.message);
   }
