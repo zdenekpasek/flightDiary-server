@@ -35,7 +35,7 @@ exports.getUser = async (req, res) => {
   const { _id } = req.user;
 
   try {
-    const { success, err } = await getUserById(_id);
+    const { success, user, err } = await getUserById(_id);
     success ? res.send({ user }) : res.status(422).send(err.message);
   } catch (err) {
     res.status(422).send(err.message);
