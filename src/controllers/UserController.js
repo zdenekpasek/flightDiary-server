@@ -49,6 +49,6 @@ exports.getStats = async (req, res) => {
     const { success, stats, err } = await getUserStats(_id);
     success ? res.send({ stats }) : res.status(422).send(err.message);
   } catch (err) {
-    res.status(422).send(err.message);
+    res.status(422).send({ stats });
   }
 };

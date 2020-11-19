@@ -1,5 +1,6 @@
 const { createMission } = require('../services/Mission/createMission-service');
 const { getMissions } = require('../services/Mission/getMissions-service');
+const { updateMission } = require('../services/Mission/updateMission-service');
 
 exports.create = async (req, res) => {
   const {
@@ -47,7 +48,50 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.update = async (req, res) => {};
+exports.update = async (req, res) => {
+  const {
+    missionName,
+    uav,
+    missionStart,
+    missionEnd,
+    usedBatteries,
+    desc,
+  } = req.body;
+
+  const { _id } = req.user;
+  const missionId = req.params.id;
+
+  if (
+    !missionId ||
+    !missionName ||
+    !uav ||
+    !missionStart ||
+    !missionEnd ||
+    !usedBatteries ||
+    !desc
+  ) {
+    return res.status(422).send({ error: 'You must provide all needed data.' });
+  }
+
+  try {
+    const { success, mission, err } = await updateMission(
+      _id,
+      missionId,
+      missionName,
+      uav,
+      missionStart,
+      missionEnd,
+      usedBatteries,
+      desc
+    );
+
+    success
+      ? res.send({ success, mission })
+      : res.status(422).send(err.message);
+  } catch (err) {
+    res.status(422).send(err.message);
+  }
+};
 
 exports.getMissions = async (req, res) => {
   const { _id } = req.user;

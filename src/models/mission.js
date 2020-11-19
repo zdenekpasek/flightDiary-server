@@ -29,7 +29,7 @@ const missionSchema = new mongoose.Schema({
   },
 
   flightTime: {
-    type: String,
+    type: Number,
   },
 
   tmp: { type: String },

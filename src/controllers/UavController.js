@@ -36,7 +36,7 @@ exports.update = async (req, res) => {
   }
 
   try {
-    const { success, updatedUav, err } = await updateUav(
+    const { success, uavs, err } = await updateUav(
       _id,
       uavId,
       uavName,
@@ -46,7 +46,7 @@ exports.update = async (req, res) => {
       okNumber
     );
 
-    success ? res.send({ success }) : res.status(422).send(err.message);
+    success ? res.send({ success, uavs }) : res.status(422).send(err.message);
   } catch (err) {
     res.status(422).send(err.message);
   }
