@@ -1,6 +1,7 @@
 const { createUav } = require('../services/Uav/createUav-service');
 const { getUavs } = require('../services/Uav/getUavs-service');
 const { updateUav } = require('../services/Uav/updateUav-service');
+const { deleteUav } = require('../services/Uav/deleteUav-service');
 
 exports.create = async (req, res) => {
   const { uavName, weight, category, uav, okNumber } = req.body;
@@ -58,6 +59,18 @@ exports.getUavs = async (req, res) => {
   try {
     const { success, uavs, err } = await getUavs(_id);
     success ? res.send({ uavs }) : res.status(422).send(err.message);
+  } catch (err) {
+    res.status(422).send(err.message);
+  }
+};
+
+exports.delete = async (req, res) => {
+  const { _id } = req.user;
+  const uavId = req.params.id;
+
+  try {
+    const { success, err } = await deleteUav(_id, uavId);
+    success ? res.send({ success }) : res.status(422).send(err.message);
   } catch (err) {
     res.status(422).send(err.message);
   }

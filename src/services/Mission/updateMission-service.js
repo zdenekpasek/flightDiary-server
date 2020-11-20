@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { use } = require('../../routes/authRoute');
 const User = mongoose.model('User');
 const Mission = mongoose.model('Mission');
+const moment = require('moment');
 
 const updateMission = async (
   _id,
@@ -22,6 +23,7 @@ const updateMission = async (
     mission.missionEnd = missionEnd;
     mission.usedBatteries = usedBatteries;
     mission.desc = desc;
+    mission.flightTime = moment(missionEnd).diff(missionStart, 'minutes');
     mission.save();
 
     return { success: true, mission };
