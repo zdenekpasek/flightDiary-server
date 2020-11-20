@@ -9,5 +9,6 @@ router.use(requireAuth);
 router.get('/mission', MissionController.getMissions);
 router.post('/mission', MissionController.create);
 router.put('/mission/:id', MissionController.update);
+router.delete('/mission/:id', MissionController.delete);
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const { createMission } = require('../services/Mission/createMission-service');
 const { getMissions } = require('../services/Mission/getMissions-service');
 const { updateMission } = require('../services/Mission/updateMission-service');
+const { deleteMission } = require('../services/Mission/deleteMission-service');
 
 exports.create = async (req, res) => {
   const {
@@ -99,6 +100,18 @@ exports.getMissions = async (req, res) => {
   try {
     const { success, missions, err } = await getMissions(_id);
     success ? res.send({ missions }) : res.status(422).send(err.message);
+  } catch (err) {
+    res.status(422).send(err.message);
+  }
+};
+
+exports.delete = async (req, res) => {
+  const { _id } = req.user;
+  const missionId = req.params.id;
+
+  try {
+    const { success, err } = await deleteMission(_id, missionId);
+    success ? res.status(200).send({success}) : res.status(422).send(err.message);
   } catch (err) {
     res.status(422).send(err.message);
   }
