@@ -1,9 +1,12 @@
 const mongoose = require('mongoose');
+const { google } = require('googleapis');
 const User = mongoose.model('User');
 const fs = require('fs');
 const path = require('path');
 const PDFDocument = require('pdfkit');
 const { generateInnerPdf } = require('../../utils/pdfFunc');
+const credentials = require('../../../credentials.json');
+const scopes = ['https://www.googleapis.com/auth/drive'];
 
 const createPdf = async (req, res, missions) => {
   try {
