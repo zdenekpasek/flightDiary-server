@@ -8,6 +8,7 @@ const authRoute = require('../routes/authRoute');
 const userRoute = require('../routes/userRoute');
 const missionRoute = require('../routes/missionRoute');
 const pdfRoute = require('../routes/pdfRouter');
+const apiDocs = require('../routes/apiDocs');
 
 class ExpressLoader {
   constructor() {
@@ -26,6 +27,7 @@ class ExpressLoader {
       })
     );
     app.use(bodyParser.json({ limit: '20mb' }));
+    app.use(apiDocs);
     app.use(authRoute);
     app.use(uavRoute);
     app.use(userRoute);

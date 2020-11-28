@@ -40,6 +40,7 @@ function uploadFile(auth, _id) {
       }
     }
   );
+  console.log(fileUrl);
   return fileUrl;
 }
 
@@ -48,6 +49,7 @@ const pushPdf = async (req, res) => {
 
   try {
     const pdfUrl = uploadFile(auth, _id);
+    // return { pdfUrl };
   } catch (err) {
     console.log(err);
   }

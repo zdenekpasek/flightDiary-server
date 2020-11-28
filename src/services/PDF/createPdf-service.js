@@ -7,24 +7,22 @@ const PDFDocument = require('pdfkit');
 const { generateInnerPdf } = require('../../utils/pdfFunc');
 const credentials = require('../../../credentials.json');
 const scopes = ['https://www.googleapis.com/auth/drive'];
+const googleApi = require('../../services/PDF/uploadPdf');
 
 const createPdf = async (req, res, missions) => {
   try {
+    let file = null;
     const { _id } = req.user;
     const pdfPath = path.join('data', 'pdf', _id + '.pdf');
     let doc = new PDFDocument({ margin: 50 });
 
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Content-Type', 'application/pdf');
-
     doc.pipe(fs.createWriteStream(pdfPath));
-    await doc.pipe(res);
 
     generateInnerPdf(doc, missions);
 
     doc.end();
 
-    return { success: true };
+    return { success: true, file };
   } catch (err) {
     return { success: false };
   }
