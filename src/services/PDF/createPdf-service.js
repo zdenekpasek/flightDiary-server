@@ -11,7 +11,6 @@ const googleApi = require('../../services/PDF/uploadPdf');
 
 const createPdf = async (req, res, missions) => {
   try {
-    let file = null;
     const { _id } = req.user;
     const pdfPath = path.join('data', 'pdf', _id + '.pdf');
     let doc = new PDFDocument({ margin: 50 });
@@ -22,7 +21,7 @@ const createPdf = async (req, res, missions) => {
 
     doc.end();
 
-    return { success: true, file };
+    return { success: true };
   } catch (err) {
     return { success: false };
   }

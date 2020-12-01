@@ -96,9 +96,12 @@ exports.update = async (req, res) => {
 
 exports.getMissions = async (req, res) => {
   const { _id } = req.user;
+  const page = parseInt(req.query.page);
+  const limit = parseInt(req.query.limit);
+  console.log(page, limit);
 
   try {
-    const { success, missions, err } = await getMissions(_id);
+    const { success, missions, err } = await getMissions(_id, page, limit);
     success ? res.send({ missions }) : res.status(422).send(err.message);
   } catch (err) {
     res.status(422).send(err.message);
@@ -111,7 +114,9 @@ exports.delete = async (req, res) => {
 
   try {
     const { success, err } = await deleteMission(_id, missionId);
-    success ? res.status(200).send({success}) : res.status(422).send(err.message);
+    success
+      ? res.status(200).send({ success })
+      : res.status(422).send(err.message);
   } catch (err) {
     res.status(422).send(err.message);
   }

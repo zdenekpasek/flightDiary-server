@@ -1,3 +1,4 @@
+global.__basedir = __dirname;
 const mongoose = require('mongoose');
 const config = require('./config');
 

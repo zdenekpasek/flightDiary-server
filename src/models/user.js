@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+var mongoosePaginate = require('mongoose-paginate');
 
 const uavSchema = new mongoose.Schema({
   uavName: {
@@ -83,5 +84,7 @@ userSchema.methods.comparePassword = function (candidatePassword) {
     });
   });
 };
+
+userSchema.plugin(mongoosePaginate);
 
 mongoose.model('User', userSchema);

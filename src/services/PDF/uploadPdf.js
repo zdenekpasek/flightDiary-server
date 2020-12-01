@@ -1,5 +1,6 @@
 const { google } = require('googleapis');
 const fs = require('fs');
+const path = require('path');
 const credentials = require('../../../credentials.json');
 const scopes = ['https://www.googleapis.com/auth/drive'];
 
@@ -13,6 +14,7 @@ exports.uploads = (_id) => {
     );
     const drive = google.drive({ version: 'v3', auth });
     var folderId = '1UOHGugDc6r7nbUWROtR71Ql12XMaE3xg';
+    const pdfPath = path.join('data', 'pdf', _id + '.pdf');
 
     var fileMetadata = {
       name: `${_id}.pdf`,
@@ -20,7 +22,7 @@ exports.uploads = (_id) => {
     };
     var media = {
       mimeType: 'application/pdf',
-      body: fs.createReadStream(`${_id}.pdf`),
+      body: fs.createReadStream(pdfPath),
     };
     drive.files.create(
       {

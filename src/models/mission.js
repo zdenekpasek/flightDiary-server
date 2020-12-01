@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+var mongoosePaginate = require('mongoose-paginate');
 
 const missionSchema = new mongoose.Schema({
   missionName: {
@@ -40,5 +41,7 @@ const missionSchema = new mongoose.Schema({
 
   _owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 });
+
+missionSchema.plugin(mongoosePaginate);
 
 mongoose.model('Mission', missionSchema);
