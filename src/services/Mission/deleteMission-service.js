@@ -3,7 +3,22 @@ const Mission = mongoose.model('Mission');
 const User = mongoose.model('User');
 
 const deleteMission = async (_id, missionId) => {
-  // TODO: delete ref mission in User, pre remove hook
+  // delete mission reference in user collection
+  try {
+    User.findOne({ _id: _id }, function (err, user) {
+      for (var i = 0; i <= user.missions.length; i++) {
+        if (String(user.missions[i]) == String(missionId)) {
+          user.missions.remove(missionId);
+          break;
+        }
+      }
+      user.save();
+    });
+  } catch (err) {
+    console.log(err);
+  }
+
+  // delete mission in mission collection
   try {
     Mission.findOne({
       _id: missionId,

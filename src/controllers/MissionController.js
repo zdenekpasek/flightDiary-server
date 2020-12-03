@@ -62,15 +62,7 @@ exports.update = async (req, res) => {
   const { _id } = req.user;
   const missionId = req.params.id;
 
-  if (
-    !missionId ||
-    !missionName ||
-    !uav ||
-    !missionStart ||
-    !missionEnd ||
-    !usedBatteries ||
-    !desc
-  ) {
+  if (!missionId || !missionName || !uav || !missionStart || !missionEnd) {
     return res.status(422).send({ error: 'You must provide all needed data.' });
   }
 
