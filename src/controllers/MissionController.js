@@ -1,5 +1,6 @@
 const { createMission } = require('../services/Mission/createMission-service');
 const { getMissions } = require('../services/Mission/getMissions-service');
+const { getMission } = require('../services/Mission/getMissionById-service');
 const { updateMission } = require('../services/Mission/updateMission-service');
 const { deleteMission } = require('../services/Mission/deleteMission-service');
 
@@ -95,6 +96,18 @@ exports.getMissions = async (req, res) => {
   try {
     const { success, missions, err } = await getMissions(_id, page, limit);
     success ? res.send({ missions }) : res.status(422).send(err.message);
+  } catch (err) {
+    res.status(422).send(err.message);
+  }
+};
+
+exports.getMissionById = async (req, res) => {
+  const { _id } = req.user;
+  const missionId = req.params.id;
+  console.log(missionId);
+  try {
+    const { success, mission, err } = await getMission(missionId);
+    success ? res.send({ mission }) : res.status(422).send(err.message);
   } catch (err) {
     res.status(422).send(err.message);
   }

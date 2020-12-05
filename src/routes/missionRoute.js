@@ -10,5 +10,6 @@ router.get('/mission', MissionController.getMissions);
 router.post('/mission', MissionController.create);
 router.put('/mission/:id', MissionController.update);
 router.delete('/mission/:id', MissionController.delete);
+router.get('/mission/:id', MissionController.getMissionById);
 
 module.exports = router;
