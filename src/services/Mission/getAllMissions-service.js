@@ -8,7 +8,6 @@ const getAllMissions = async (_id, page, limit) => {
       .lean()
       .populate('missions')
       .then((usr) => {
-        console.log(usr);
         Object.assign(missions, usr.missions);
       });
     return { success: true, missions };

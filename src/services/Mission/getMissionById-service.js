@@ -7,7 +7,6 @@ const getMission = async (missionId) => {
     await Mission.findOne({ _id: missionId })
       .lean()
       .then((ms) => {
-        console.log(ms);
         Object.assign(mission, ms);
       });
     return { success: true, mission };

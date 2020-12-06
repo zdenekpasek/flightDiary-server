@@ -27,7 +27,6 @@ const updateUav = async (
       }
     ).exec((err, missions) => {
       if (err) throw err;
-      console.log(missions);
     });
 
     uavById.uavName = uavName;

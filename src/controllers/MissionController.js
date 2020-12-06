@@ -91,7 +91,6 @@ exports.getMissions = async (req, res) => {
   const { _id } = req.user;
   const page = parseInt(req.query.page);
   const limit = parseInt(req.query.limit);
-  console.log(page, limit);
 
   try {
     const { success, missions, err } = await getMissions(_id, page, limit);
@@ -104,7 +103,6 @@ exports.getMissions = async (req, res) => {
 exports.getMissionById = async (req, res) => {
   const { _id } = req.user;
   const missionId = req.params.id;
-  console.log(missionId);
   try {
     const { success, mission, err } = await getMission(missionId);
     success ? res.send({ mission }) : res.status(422).send(err.message);

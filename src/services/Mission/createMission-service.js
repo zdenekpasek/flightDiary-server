@@ -35,7 +35,6 @@ const createMission = async (
     });
 
     const user = await User.findById(_id);
-    console.log(user);
     user.missions.push({
       _id: missionId,
     });
