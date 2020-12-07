@@ -13,7 +13,7 @@ const createPdf = async (req, res, missions) => {
   try {
     const { _id } = req.user;
     const pdfPath = path.join('data', 'pdf', _id + '.pdf');
-    let doc = new PDFDocument({ margin: 50 });
+    let doc = new PDFDocument({ bufferPages: true, margin: 50 });
 
     doc.pipe(fs.createWriteStream(pdfPath));
 

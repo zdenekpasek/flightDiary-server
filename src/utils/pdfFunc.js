@@ -21,10 +21,16 @@ function generateFooter(doc) {
 }
 
 function generateBody(doc, missions) {
+  let index = 1;
   for (i = 0; i < missions.length; i++) {
     const item = missions[i];
-    const position = tableStartPos + (i + 1) * 60;
-
+    let position = tableStartPos + index * 60;
+    index++;
+    if (position > 650) {
+      index = 0;
+      tableStartPos = 20;
+      doc.addPage();
+    }
     generateTableBody(
       doc,
       position,
