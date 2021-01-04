@@ -5,11 +5,11 @@ function generateHeader(doc, missions) {
   doc
     .fillColor('#444444')
     .fontSize(20)
-    .text('Letecký deník', 50, 57)
+    .text('Letecký deník', 50, 20)
     .fontSize(17)
-    .text('Export misí', 50, 80)
+    .text('Export misí', 50, 40)
     .fontSize(12)
-    .text(`Pilot: ${missions[0].pilot}`, 200, 65, { align: 'right' })
+    .text(`Pilot: ${missions[0].pilot}`, 200, 50, { align: 'right' })
     .fontSize(17)
     .moveDown();
 }
@@ -28,7 +28,7 @@ function generateBody(doc, missions) {
     index++;
     if (position > 650) {
       index = 0;
-      tableStartPos = 20;
+      tableStartPos = 100;
       doc.addPage();
     }
     generateTableBody(
